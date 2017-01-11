@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="64px" height="60px" viewBox="0 0 64 60" enable-background="new 0 0 64 60" xml:space="preserve">
+<path fill="#fff" d="M54.652,56.287h-46.9V3.758h46.9v4.69h3.752V0.006H4v60.033h54.404V24.395h-3.752V56.287z M50.9,7.51
+	c0,0,0,1.084,0,3.752C30.688,9.375,28.624,27.631,28.624,27.631c8.235-14.01,22.276-7.927,22.276-7.927v5.628l11.257-8.443
+	L50.9,7.51z"/>
+<text transform="matrix(1 0 0 1 9.4167 50.375)" fill="#fff" font-family="'TimesNewRomanPS-BoldMT'" font-size="17">JSON</text>
+</svg>

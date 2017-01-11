@@ -1,0 +1,252 @@
+<html lang="en">
+   <head>
+      <!-- Meta tags details -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <!-- Favicon icon -->
+      <title>Zodiac - Vessel Visit</title>
+      <link rel="stylesheet" type="text/css" href="base/css/lib/bootstrap/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="base/css/style.css">
+      <link rel="stylesheet" type="text/css" href="base/css/reset.css">
+      <link rel="stylesheet" type="text/css" href="base/css/responsive.css">
+      <link rel="stylesheet" type="text/css" href="base/css/lib/scrollbar/jquery.jscrollpane.css">
+      <link rel="stylesheet" type="text/css" href="base/css/lib/owl-carousel/owl.carousel.min.css">
+      <link rel="stylesheet" type="text/css" href="base/css/lib/bootstrap/bootstrap-select.css">
+      <link rel="stylesheet" type="text/css" media="all" href="base/css/lib/bootstrap/daterangepicker.css">
+   </head>
+   <body class="vessel-visit">
+      <header>
+         <section class="header-top">
+            <div class="block-container clearfix">
+               <div class="col-md-8 no-padding">
+                  <div class="header-left">
+                     <div class="header-date">Saturday, 31 December 2016</div>
+                     <div class="header-time">14:06:35</div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="header-right">
+                     <div class="top-bar-menu">
+                        <div class="user-profile">
+                           <a href="javascript:void(0);" class="user-profile-link"><span class="user-text">kiwiqa02</span> <span class="arrow"></span></a> 
+                           <div style="display: none;" class="user-profile-menu">
+                              <ul>
+                                 <li><a onclick="genLogout();" href="javascript:void(0)">Logout</a></li>
+                                 <li><a href="/zodiac/core/change-password">Change Password</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                        <div class="user-name"><span class="user-text-mict">MICT</span></div>
+                        <div class="language">
+                           <div class="dropdown-list-menu">
+                              <div class="btn-group bootstrap-select">
+                                 <button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" title="English"><span class="filter-option pull-left">English</span>&nbsp;<span class="bs-caret"><span class="caret"></span></span></button>
+                                 <div class="dropdown-menu open">
+                                    <ul class="dropdown-menu inner" role="menu">
+                                       <li data-original-index="0" class="selected"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">English</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                       <li data-original-index="1"><a tabindex="0" class="" style="" data-tokens="null"><span class="text">中文</span><span class="glyphicon glyphicon-ok check-mark"></span></a></li>
+                                    </ul>
+                                 </div>
+                                 <select class="selectpicker" tabindex="-98">
+                                    <option value="en-us" selected="selected">English</option>
+                                    <option value="zh-cn">中文</option>
+                                    Click Me
+                                 </select>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mobi-search  pull-right"><a href="#"><img src="base/img/icons/search.svg" alt="Search"></a></div>
+               </div>
+            </div>
+         </section>
+         <section class="menu-part clearfix">
+            <div class="block-container">
+               <nav class="navbar navbar-default">
+                  <div>
+                     <div class="logo-fix-width"><a href="home"><img src="base/img/logo.png"></a></div>
+                  </div>
+                  <div id="navbar">
+                     <nav class="navbar navbar-default navbar-static-top" role="navigation">
+                        <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button></div>
+                        <div class="collapse navbar-collapse" id="navbar-collapse-1">
+                           <div class="menu clearfix">
+                              <ul class="nav navbar-nav">
+                                 <li class="active"><a href="home"> <span class="home icon">&nbsp;</span>Home</a></li>
+                                 <li><a href="javascript:void(0);" class="about-us"> <span class="about-us icon">&nbsp;</span>About Zodiac</a></li>
+                                 <li><a href="javascript:void(0);" class="help-call"><span class="help icon">&nbsp;</span>Help</a></li>
+                                 <li><a href="javascript:void(0);" class="support"><span class="support icon">&nbsp;</span>Support</a></li>
+                              </ul>
+                              <div class="search">
+                                 <form class="search-details" id="search_details">
+                                    <input type="text" placeholder="Search" id="search_container_no" autocomplete="off" class="text-box search-container-no set-uppercase" data-uppercase="true" name="containerNumber" value="">
+                                    <ul class="typeahead dropdown-menu"></ul>
+                                    <button class="search-btn" type="submit"> </button>
+                                 </form>
+                              </div>
+                           </div>
+                           <div class="bradcrum-menu">
+                              <ul>
+                                 <li class="bred_pan"><a href="home">HOME</a></li>
+                                 <li class="bred_pan"><a href="vessel-visit">Vessel Visit</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </nav>
+                  </div>
+               </nav>
+            </div>
+         </section>
+         <div class="mobile-top-search">
+            <div class="search mobile-search" style="display:none;">
+               <form class="search-details" id="search_details_mobi">
+                  <input type="text" placeholder="Search" id="search_container_no_mobi" autocomplete="off" class="text-box search-container-no set-uppercase" data-uppercase="true" name="containerNumber" value="">
+                  <ul class="typeahead dropdown-menu"></ul>
+                  <button class="search-btn" type="submit"> </button>
+               </form>
+            </div>
+         </div>
+      </header>
+      <section class="clearfix content-section">
+         <aside class="left-panel desktop-sidebar">
+            <div class="sidebar-nav">
+               <div class="eqpgroup side-bar-sub-menu sidebar-link sidebar-submenu" data-level="0">
+                  <a class="tab_action tooltip-right" data-tooltip="Equipment" href="http://192.168.0.134:8081/zodiac/core/home?screenname=eqpgroup" rel="http://192.168.0.134:8081/zodiac/core/home?screenname=eqpgroup" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/equipment.svg" alt="equipment"><img class="image hover" src="base/img/icons/equipment-hover.svg" alt="equipment-hover"></a>
+                  <div class="sidebar-sublink submenuLevel-1">
+                     <div class="equipment side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="Equipment" href="http://192.168.0.134:8081/zodiac/core/equipment" rel="http://192.168.0.134:8081/zodiac/core/equipment" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/equipment.svg" alt="equipment"><img class="image hover" src="base/img/icons/equipment-hover.svg" alt="equipment-hover"></a></div>
+                  </div>
+               </div>
+               <div class="vesselgroup side-bar-sub-menu sidebar-link sidebar-submenu" data-level="0">
+                  <a class="tab_action tooltip-right" data-tooltip="Vessel" href="http://192.168.0.134:8081/zodiac/core/home?screenname=vesselgroup" rel="http://192.168.0.134:8081/zodiac/core/home?screenname=vesselgroup" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/vessel.svg" alt="vessel"><img class="image hover" src="base/img/icons/vessel-hover.svg" alt="vessel-hover"></a>
+                  <div class="sidebar-sublink submenuLevel-1">
+                     <div class="vesselvisit side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="Vessel Visit" href="http://192.168.0.134:8081/zodiac/core/vessel-visit" rel="http://192.168.0.134:8081/zodiac/core/vessel-visit" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/vesselvisit.svg" alt="vesselvisit"><img class="image hover" src="base/img/icons/vesselvisit-hover.svg" alt="vesselvisit-hover"></a></div>
+                     <div class="vesselservice side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="Vessel Service" href="http://192.168.0.134:8081/zodiac/core/vessel-service" rel="http://192.168.0.134:8081/zodiac/core/vessel-service" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/vesselservice.svg" alt="vesselservice"><img class="image hover" src="base/img/icons/vesselservice-hover.svg" alt="vesselservice-hover"></a></div>
+                     <div class="vessel side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="Vessel" href="http://192.168.0.134:8081/zodiac/core/vessel" rel="http://192.168.0.134:8081/zodiac/core/vessel" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/vessel.svg" alt="vessel"><img class="image hover" src="base/img/icons/vessel-hover.svg" alt="vessel-hover"></a></div>
+                  </div>
+               </div>
+               <div class="admingroup side-bar-sub-menu sidebar-link sidebar-submenu" data-level="0">
+                  <a class="tab_action tooltip-right" data-tooltip="Admin" href="http://192.168.0.134:8081/zodiac/core/home?screenname=admingroup" rel="http://192.168.0.134:8081/zodiac/core/home?screenname=admingroup" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/admin.svg" alt="admin"><img class="image hover" src="base/img/icons/admin-hover.svg" alt="admin-hover"></a>
+                  <div class="sidebar-sublink submenuLevel-1">
+                     <div class="user side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="User" href="http://192.168.0.134:8081/zodiac/core/security/user" rel="http://192.168.0.134:8081/zodiac/core/security/user" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/user.svg" alt="user"><img class="image hover" src="base/img/icons/user-hover.svg" alt="user-hover"></a></div>
+                     <div class="role side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="Role" href="http://192.168.0.134:8081/zodiac/core/security/role" rel="http://192.168.0.134:8081/zodiac/core/security/role" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/rolemgnt.svg" alt="rolemgnt"><img class="image hover" src="base/img/icons/rolemgnt-hover.svg" alt="rolemgnt-hover"></a></div>
+                     <div class="usergroup side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="User Group" href="http://192.168.0.134:8081/zodiac/core/security/user-group" rel="http://192.168.0.134:8081/zodiac/core/security/user-group" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/usergroupmgnt.svg" alt="usergroupmgnt"><img class="image hover" src="base/img/icons/usergroupmgnt-hover.svg" alt="usergroupmgnt-hover"></a></div>
+                     <div class="referencedata side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="Reference Data" href="http://192.168.0.134:8081/zodiac/core/ref-data" rel="http://192.168.0.134:8081/zodiac/core/ref-data" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/referencedata.svg" alt="referencedata"><img class="image hover" src="base/img/icons/referencedata-hover.svg" alt="referencedata-hover"></a></div>
+                     <div class="setting side-bar-sub-menu-link sidebar-link" data-level="1"><a class="tab_action tooltip-right" data-tooltip="Setting" href="http://192.168.0.134:8081/zodiac/core/setting" rel="http://192.168.0.134:8081/zodiac/core/setting" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/setting.svg" alt="setting"><img class="image hover" src="base/img/icons/setting-hover.svg" alt="setting-hover"></a></div>
+                     <div class="adminmenu side-bar-sub-menu-link sidebar-link sidebar-submenu" data-level="1">
+                        <a class="tab_action tooltip-right" data-tooltip="Admin Menu" href="http://192.168.0.134:8081/zodiac/core/home?screenname=adminmenu" rel="http://192.168.0.134:8081/zodiac/core/home?screenname=adminmenu" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/admin.svg" alt="admin"><img class="image hover" src="base/img/icons/admin-hover.svg" alt="admin-hover"></a>
+                        <div class="sidebar-sublink submenuLevel-2">
+                           <div class="securitygroup side-bar-sub-menu sidebar-link sidebar-submenu" data-level="2">
+                              <a class="tab_action tooltip-right" data-tooltip="Security" href="http://192.168.0.134:8081/zodiac/core/home?screenname=securitygroup" rel="http://192.168.0.134:8081/zodiac/core/home?screenname=securitygroup" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/securityadmin.svg" alt="securityadmin"><img class="image hover" src="base/img/icons/securityadmin-hover.svg" alt="securityadmin-hover"></a>
+                              <div class="sidebar-sublink submenuLevel-3">
+                                 <div class="user side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="User" href="http://192.168.0.134:8081/zodiac/core/security/user" rel="http://192.168.0.134:8081/zodiac/core/security/user" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/user.svg" alt="user"><img class="image hover" src="base/img/icons/user-hover.svg" alt="user-hover"></a></div>
+                                 <div class="role side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Role" href="http://192.168.0.134:8081/zodiac/core/security/role" rel="http://192.168.0.134:8081/zodiac/core/security/role" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/rolemgnt.svg" alt="rolemgnt"><img class="image hover" src="base/img/icons/rolemgnt-hover.svg" alt="rolemgnt-hover"></a></div>
+                                 <div class="usergroup side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="User Group" href="http://192.168.0.134:8081/zodiac/core/security/user-group" rel="http://192.168.0.134:8081/zodiac/core/security/user-group" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/usergroupmgnt.svg" alt="usergroupmgnt"><img class="image hover" src="base/img/icons/usergroupmgnt-hover.svg" alt="usergroupmgnt-hover"></a></div>
+                                 <div class="appservice side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Service" href="http://192.168.0.134:8081/zodiac/core/security/service" rel="http://192.168.0.134:8081/zodiac/core/security/service" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/servicemgnt.svg" alt="servicemgnt"><img class="image hover" src="base/img/icons/servicemgnt-hover.svg" alt="servicemgnt-hover"></a></div>
+                                 <div class="appfunc side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Function" href="http://192.168.0.134:8081/zodiac/core/security/function" rel="http://192.168.0.134:8081/zodiac/core/security/function" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/funcmgnt.svg" alt="funcmgnt"><img class="image hover" src="base/img/icons/funcmgnt-hover.svg" alt="funcmgnt-hover"></a></div>
+                                 <div class="appresource side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Resource" href="http://192.168.0.134:8081/zodiac/core/security/resource" rel="http://192.168.0.134:8081/zodiac/core/security/resource" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/resourcemgnt.svg" alt="resourcemgnt"><img class="image hover" src="base/img/icons/resourcemgnt-hover.svg" alt="resourcemgnt-hover"></a></div>
+                              </div>
+                           </div>
+                           <div class="configgroup side-bar-sub-menu sidebar-link sidebar-submenu" data-level="2">
+                              <a class="tab_action tooltip-right" data-tooltip="Configuration" href="http://192.168.0.134:8081/zodiac/core/home?screenname=configgroup" rel="http://192.168.0.134:8081/zodiac/core/home?screenname=configgroup" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/configadmin.svg" alt="configadmin"><img class="image hover" src="base/img/icons/configadmin-hover.svg" alt="configadmin-hover"></a>
+                              <div class="sidebar-sublink submenuLevel-3">
+                                 <div class="setting side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Setting" href="http://192.168.0.134:8081/zodiac/core/setting" rel="http://192.168.0.134:8081/zodiac/core/setting" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/setting.svg" alt="setting"><img class="image hover" src="base/img/icons/setting-hover.svg" alt="setting-hover"></a></div>
+                                 <div class="config side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Configuration" href="http://192.168.0.134:8081/zodiac/core/config" rel="http://192.168.0.134:8081/zodiac/core/config" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/configuration.svg" alt="configuration"><img class="image hover" src="base/img/icons/configuration-hover.svg" alt="configuration-hover"></a></div>
+                                 <div class="settingtemplate side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Setting Template" href="http://192.168.0.134:8081/zodiac/core/setting/template" rel="http://192.168.0.134:8081/zodiac/core/setting/template" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/setting-template.svg" alt="setting-template"><img class="image hover" src="base/img/icons/setting-template-hover.svg" alt="setting-template-hover"></a></div>
+                              </div>
+                           </div>
+                           <div class="organizationgroup side-bar-sub-menu sidebar-link sidebar-submenu" data-level="2">
+                              <a class="tab_action tooltip-right" data-tooltip="Organization" href="http://192.168.0.134:8081/zodiac/core/home?screenname=organizationgroup" rel="http://192.168.0.134:8081/zodiac/core/home?screenname=organizationgroup" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/organizationconfigadmin.svg" alt="organizationconfigadmin"><img class="image hover" src="base/img/icons/organizationconfigadmin-hover.svg" alt="organizationconfigadmin-hover"></a>
+                              <div class="sidebar-sublink submenuLevel-3">
+                                 <div class="organization side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Organization" href="http://192.168.0.134:8081/zodiac/core/organization" rel="http://192.168.0.134:8081/zodiac/core/organization" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/organizationmgnt.svg" alt="organizationmgnt"><img class="image hover" src="base/img/icons/organizationmgnt-hover.svg" alt="organizationmgnt-hover"></a></div>
+                                 <div class="bizunit side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Business Unit" href="http://192.168.0.134:8081/zodiac/core/biz-unit" rel="http://192.168.0.134:8081/zodiac/core/biz-unit" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/businessunit.svg" alt="businessunit"><img class="image hover" src="base/img/icons/businessunit-hover.svg" alt="businessunit-hover"></a></div>
+                              </div>
+                           </div>
+                           <div class="refdatagroup side-bar-sub-menu sidebar-link sidebar-submenu" data-level="2">
+                              <a class="tab_action tooltip-right" data-tooltip="Reference Data" href="http://192.168.0.134:8081/zodiac/core/home?screenname=refdatagroup" rel="http://192.168.0.134:8081/zodiac/core/home?screenname=refdatagroup" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/referenceadmin.svg" alt="referenceadmin"><img class="image hover" src="base/img/icons/referenceadmin-hover.svg" alt="referenceadmin-hover"></a>
+                              <div class="sidebar-sublink submenuLevel-3">
+                                 <div class="referencedata side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Reference Data" href="http://192.168.0.134:8081/zodiac/core/ref-data" rel="http://192.168.0.134:8081/zodiac/core/ref-data" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/referencedata.svg" alt="referencedata"><img class="image hover" src="base/img/icons/referencedata-hover.svg" alt="referencedata-hover"></a></div>
+                                 <div class="referencesetscope side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Reference Set Scope" href="http://192.168.0.134:8081/zodiac/core/ref-set-usage" rel="http://192.168.0.134:8081/zodiac/core/ref-set-usage" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/referencesetscope.svg" alt="referencesetscope"><img class="image hover" src="base/img/icons/referencesetscope-hover.svg" alt="referencesetscope-hover"></a></div>
+                                 <div class="referenceset side-bar-sub-menu-link sidebar-link" data-level="3"><a class="tab_action tooltip-right" data-tooltip="Reference Set" href="http://192.168.0.134:8081/zodiac/core/ref-set" rel="http://192.168.0.134:8081/zodiac/core/ref-set" data-ajaxreq="false" data-newwindow="false"><img class="image" src="base/img/icons/referenceset.svg" alt="referenceset"><img class="image hover" src="base/img/icons/referenceset-hover.svg" alt="referenceset-hover"></a></div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </aside>
+         <aside class="right-panel">
+            <div class="panel-block">
+               <div class="panel-block-head clearfix" style="height: 40px;">
+                  <div class="panel-block-icon"><span><img src="base/img/icons/panel-vessel-visit-icon.svg" width="16" height="16" alt="panel-icon"> </span></div>
+                  <div class="panel-block-heading">Vessel Visit</div>
+                  <div class="app-action-group app-action">
+                     <a class="drop-btn-panel" href="javascript:void(0);" style="height: 39px; line-height: 39px;"></a>
+                     <div class="panel-block-actions"><a class="tooltip-panel tooltip-bottom list-action" data-openurl="vessel-visit" data-opentype="newPage" data-rel="app-action-form-listview" data-tooltip="List" href="javascript:void(0);" style="height: 39px; line-height: 39px;">List</a></div>
+                  </div>
+                  <div class="mobile-action-grp-btn" style="display:none;">
+                     <div class="action-arrow open"><a href="#"><i class="fa fa-caret-down"></i></a></div>
+                     <div class="action-grp">
+                        <div class="grid-specific clearfix">
+                           <p>Grid Specific Actions</p>
+                           <div class="app-action-group "><a class="tooltip-panel tooltip-bottom list-action" data-openurl="vessel-visit" data-opentype="newPage" data-rel="app-action-form-listview" data-tooltip="List" href="javascript:void(0);" style="height: 39px; line-height: 39px;">List</a></div>
+                        </div>
+                        <div class="app-specific clearfix" style="display: none;">
+                           <p></p>
+                           <div class="app-action-group "></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="panel-block-content no-padding">
+                  <div class="global-message-wrapper col-md-12"></div>
+                  <div class="panel-block-head-content no-padding">
+                     <div class="panel-grid-main" id="appendGrid"></div>
+                  </div>
+               </div>
+            </div>
+         </aside>
+      </section>
+      <div class="scroll-actions"><a href="javascript:;" class="scrollup" style="display: none;">Scroll</a></div>
+      <footer class="footer">
+         <div class="pull-left">2016 Copyright © DP World. All rights reserved.</div>
+         <div class="pull-right"><span class="version">1.0.0.11.2</span> | <span class="environment">ZARAQA</span></div>
+      </footer>
+      <script type="text/javascript" src="base/js/lib/jQuery/jquery-v2-1-1.min.js"></script>
+      <!-- Bootstrap Plugin Js -->
+      <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap.min.js"></script>
+      <script type="text/javascript" src="base/js/lib/blockUI/jquery.blockUI.js"></script>
+      <script type="text/javascript" src="base/js/lib/language/jquery.i18n.properties.js"></script>
+      <script type="text/javascript" src="base/js/lib/owl-slider/owl.carousel.js"></script>	
+      <!-- custom scrollbar plugin -->
+      <script type="text/javascript" src="base/js/lib/scrollbar/jquery.jscrollpane.min.js"></script>
+      <script type="text/javascript" src="base/js/lib/scrollbar/jquery.mousewheel.js"></script>
+      <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap-select.js"></script>
+      <script type="text/javascript" src="base/js/lib/bootstrap/moment.js"></script>
+      <script type="text/javascript" src="base/js/lib/bootstrap/daterangepicker.js"></script>
+      <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap-typeahead.js"></script>
+      <!-- Custom JavaScript -->
+	  <script type="text/javascript" src="base/js/plugins/validation.js"></script>
+	  <script type="text/javascript" src="base/js/include/panel.js"></script>
+      <script type="text/javascript" src="base/js/plugins/dynamic-grid.js"></script>
+	  <script type="text/javascript" src="base/js/plugins/dynamic-filter.js"></script>
+      <script type="text/javascript" src="base/js/include/variables.js"></script>  
+      <script type="text/javascript" src="core/js/include/variables.js"></script>  
+      <script type="text/javascript" src="base/js/include/form-elements.js"></script>
+      <script type="text/javascript" src="base/js/include/functions.js"></script>
+      <script type="text/javascript" src="base/js/include/grid-actions.js"></script> 
+      <script type="text/javascript" src="base/js/include/general.js"></script>
+      <script type="text/javascript" src="base/layouts/common-template.js"></script>  
+      <script type="text/javascript" src="base/layouts/lib-template.js"></script>  
+      <script type="text/javascript">
+         $(document).ready(function(){
+			basePanel.generatePanelAjax("basePanel.generateModule");
+         });
+          
+      </script>
+   </body>
+</html>

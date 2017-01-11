@@ -1,0 +1,103 @@
+.jspContainer {
+    overflow: hidden;
+    position: relative;
+}
+.jspPane {
+    position: absolute;
+}
+.jspVerticalBar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;}
+.jspHorizontalBar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background: #fff;
+}
+.jspCap {
+    display: none;
+}
+.jspHorizontalBar .jspCap {
+    float: left;
+}
+.jspTrack {
+    background: #d8d8d8;
+    position: relative;
+}
+.jspDrag {
+    background: #120e5b;
+    position: relative;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+}
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag {
+    float: left;
+    height: 100%;
+}
+.jspArrow {
+    background: #e6e6e6;
+    text-indent: -20000px;
+    display: block;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+}
+.jspVerticalBar .jspArrow {
+    height: 10px;
+}
+.jspHorizontalBar .jspArrow {
+    width: 10px;
+    float: left;
+    height: 100%;
+}
+.jspVerticalBar .jspArrow:focus {
+    outline: none;
+}
+.jspCorner {
+    background: #eeeef4;
+    float: left;
+    height: 100%;
+    display: none;
+}
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+
+* html .jspCorner {
+    margin: 0 -3px 0 0;
+}
+.jspArrow.jspArrowUp {
+    background-image: url("../../../img/icons/v-scroll-top.svg");
+    background-repeat: no-repeat;
+    background-size: 10px auto;
+    margin: 0px;
+    float: none;
+}
+.jspArrow.jspArrowDown {
+    background-image: url("../../../img/icons/v-scroll-bottom.svg");
+    background-repeat: no-repeat;
+    background-size: 10px auto;
+    margin: 0px;
+    float: none;
+}
+.jspArrow.jspArrowLeft {
+    background-image: url("../../../img/icons/h-scroll-left.svg");
+    background-repeat: no-repeat;
+    background-size: 10px auto;
+}
+.jspArrow.jspArrowRight {
+    background-image: url("../../../img/icons/h-scroll-right.svg");
+    background-repeat: no-repeat;
+    background-size: 10px auto;
+}
+.page-options .jspArrow.jspArrowUp,
+.page-options .jspVerticalBar .jspArrow {
+    display: block;
+    width: 10px;
+    border: none;
+}

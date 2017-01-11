@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+<g>
+	<path fill="none" stroke="#2992D6" stroke-width="3.862" stroke-linecap="round" stroke-linejoin="round" d="M38.541,58.846
+		c-0.159-0.32-0.32-0.07-0.32-0.07H7.353c-2.248,0-4.072-1.825-4.072-4.075V6.744c0-2.251,1.824-4.078,4.072-4.078h35.659
+		c2.247,0,4.072,1.827,4.072,4.078"/>
+	<line fill="none" stroke="#2992D6" stroke-width="3.4349" stroke-linecap="round" x1="10.829" y1="9.361" x2="40.902" y2="9.361"/>
+	
+		<line fill="none" stroke="#2992D6" stroke-width="3.4349" stroke-linecap="round" x1="10.829" y1="14.999" x2="40.902" y2="14.999"/>
+	
+		<line fill="none" stroke="#2992D6" stroke-width="3.4349" stroke-linecap="round" x1="10.829" y1="20.637" x2="40.902" y2="20.637"/>
+	
+		<line fill="none" stroke="#2992D6" stroke-width="3.4349" stroke-linecap="round" x1="10.829" y1="26.055" x2="24.308" y2="26.055"/>
+	<line fill="none" stroke="#2992D6" stroke-width="4.8148" x1="15.059" y1="47.309" x2="15.059" y2="54.827"/>
+	<line fill="none" stroke="#2992D6" stroke-width="4.8148" x1="22.576" y1="39.79" x2="22.576" y2="54.827"/>
+	<g>
+		<path fill="none" stroke="#2992D6" stroke-width="2.8889" stroke-linecap="round" stroke-linejoin="round" d="M12.239,42.844
+			l8.43-8.432c0.79-0.785,2.084-0.785,2.873,0l4.173,4.178c0.792,0.79,2.084,0.79,2.876,0l8.664-8.666"/>
+	</g>
+</g>
+<circle fill="none" stroke="#2992D6" stroke-width="3.8519" cx="47.919" cy="47.73" r="14.34"/>
+<polygon fill="#2992D6" stroke="#2992D6" points="45.5,6.5 45.5,33.496 48.5,33.916 48.5,6.5 "/>
+<g>
+	<path fill="#2A92D6" d="M61.703,51.303l0.422-1.484l-4.28,0.012v-1.713l-1.322-1.275l-1.327,1.275v1.713h-1.609v-1.713
+		l-1.325-1.275l-1.325,1.275v1.713h-1.612v-1.713l-1.325-1.275l-1.325,1.275v1.713h-1.611v-1.713l-1.325-1.275l-1.325,1.275v1.713
+		H40.8v-1.713l-1.327-1.275l-1.325,1.275v1.713l-3.18-0.012v1.507l3.18-0.008v6.316h-1.611v1.486h1.611v1.698h2.65V59.12h1.613
+		v1.698h2.648V59.12h1.611v1.698h2.652V59.12h1.61v1.698h2.651V59.12h1.61v1.698h2.649V59.12h1.611v-1.486h-1.611v-6.317
+		L61.703,51.303z M40.8,57.634v-6.316h1.609v6.316H40.8L40.8,57.634z M45.062,57.634v-6.316h1.611v6.316H45.062L45.062,57.634z
+		 M49.323,57.634v-6.316h1.612v6.316H49.323L49.323,57.634z M55.195,57.634h-1.609v-6.316h1.609V57.634z"/>
+</g>
+<text transform="matrix(1 0 0 1 41.4932 45.125)" fill="#2A92D6" font-family="'NexaBold'" font-size="8">MIS</text>
+</svg>

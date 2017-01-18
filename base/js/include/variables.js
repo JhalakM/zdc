@@ -4,10 +4,9 @@ var current_moduleId = 1;
 if (!window.location.origin) {
 	   window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port : '');
 }
-
 /* variables  for set baseurl path */
-var SetWebURL 											    = window.location.origin + "/" + window.location.pathname.split( '/' )[1] + "/" + window.location.pathname.split( '/' )[2] + "/";
-
+var SetWebURL 											    = window.location.origin + "/" + window.location.pathname.split( '/' )[1] + "/" ;
+//+ window.location.pathname.split( '/' )[2] + "/"
 var SetWebApiURL 											= SetWebURL;
 
 var pathValue 												= window.location.pathname.split( '/' )[1] + "/" + window.location.pathname.split( '/' )[2];
@@ -18,6 +17,7 @@ var current_theme_css 										= SetWebURL + "assets/" + current_theme + "/styl
 var accordionArray											= {};
 
 var gridKeyConfig											= "";
+
 var switchInc 												= 0;
 var saveAlertFlag 											= 0;
 var formDependecies											= undefined;
@@ -51,12 +51,6 @@ var totalMonths 											= {
 var date 													= new Date();
 var year 													= date.getFullYear();
 
-/*var moduleTypeJson											= {
-																"LIST" : "list",
-																"ADD"  : "add",
-																"EDIT" : "edit",
-																"VIEW" : "view"
-															};*/
 var moduleTypeJson												= [
                   											   	"refreshAction",
                   											   	"batchEditAction",
@@ -250,4 +244,72 @@ var CODE_WARNING 											= 7;
 var CODE_BATCHEDIT											= 99;
 var CODE_SESSIONERROR										= 4
 
+var current_zodiac	 										= "core";
+var origHeight 												= "";
+var current_moduleId 										= "";
+var defaultSettings  										= undefined;
 
+var userName 												= "Zodiac";
+var gridActionObj											= {};
+
+
+//id variables
+var app_action_report_criteria_wrapper 						= "#app-action-form-report-criteria";
+var app_action_form_addmore_wrapper							= "#app-action-form-addmore";
+
+var batchupdate_form_block_selecter							= '#batchupdate-form-block';
+
+var download_report_wrapper									= "#download_report";
+
+var filter_report_form_wrapper								= "#filter_form";
+var filter_app_id_data_wrapper								= "#app-action-form-filter";
+var filter_create_wrapper									= "#filter-create-form-block";
+
+var grid_popup_block_wrapper 								= "#grid-popup-block";
+var grid_addon_tagTypes_wrapper                    			= "input[name=tagTypes]";
+var grid_all_action_wrapper_id								= "#action_popup";
+
+var manage_columns_wrapper_id								= "#manage-columns";
+
+var panel_grid_wrapper 										= '#panel-grid-content'; 
+
+var send_edi_email_block_wrapper 							= '#send-edi-email-form-block';
+var send_report_email_block_wrapper 						= '#send-report-email-form-block';
+
+var set_empty_value 										= "#^EMPTY^#"
+var listGridDetails											= {};
+
+var current_zodiac	 										= "core";
+var origHeight 												= "";
+var current_moduleId 										= "";
+var defaultSettings  										= undefined;
+
+var userName 												= "Zodiac";
+var gridActionObj											= {};
+
+
+//id variables
+var app_action_report_criteria_wrapper 						= "#app-action-form-report-criteria";
+var app_action_form_addmore_wrapper							= "#app-action-form-addmore";
+
+var batchupdate_form_block_selecter							= '#batchupdate-form-block';
+
+var download_report_wrapper									= "#download_report";
+
+var filter_report_form_wrapper								= "#filter_form";
+var filter_app_id_data_wrapper								= "#app-action-form-filter";
+var filter_create_wrapper									= "#filter-create-form-block";
+
+var grid_popup_block_wrapper 								= "#grid-popup-block";
+var grid_addon_tagTypes_wrapper                    			= "input[name=tagTypes]";
+var grid_all_action_wrapper_id								= "#action_popup";
+
+var manage_columns_wrapper_id								= "#manage-columns";
+
+var panel_grid_wrapper 										= '#panel-grid-content'; 
+
+var send_edi_email_block_wrapper 							= '#send-edi-email-form-block';
+var send_report_email_block_wrapper 						= '#send-report-email-form-block';
+
+var set_empty_value 										= "#^EMPTY^#"
+var listGridDetails											= {};

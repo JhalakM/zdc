@@ -411,7 +411,7 @@ $(document).ready(function(){
 											var gridkey = $(elementWrapperId).attr("data-gridkey")?$(elementWrapperId).attr("data-gridkey"):listGridDetails.gridKey;
 											var griddispkey = $(elementWrapperId).attr("data-griddispkey")?$(elementWrapperId).attr("data-griddispkey"):listGridDetails.gridDispKey;
 											
-											basePanel.createGrid({"gridKey":gridkey,"gridDispKey":griddispkey});
+											baseFunctions.createGrid({"gridKey":gridkey,"gridDispKey":griddispkey});
 										},500);
 									}
 								},
@@ -503,7 +503,7 @@ $(document).ready(function(){
 					"blockWrapper"		: "manage-columns",
 					"wrapperId"			: manage_columns_wrapper_id,
 					"getURL"			: "json/all-columns.json",
-					"setURL"			: "save-manage-columns"
+					"setURL"			: "json/save-manage-columns.json"
 			};
 			baseGridActions.generateColumnComponent(componentObject);
 		});
@@ -681,7 +681,7 @@ $(document).ready(function(){
 													$(wrapperId).modal('hide');
 													selected_page_records = $(page_records_selector).val();
 													var ajaxPaginationParams = {
-															"ajaxURL" 			: SetWebApiURL+'page-details',
+															"ajaxURL" 			: SetWebApiURL+'json/page-details.json',
 															"pageNo"  			: 1,
 															"recordsPerPage"	: selected_page_records,
 															"currentPage"		: 1,
@@ -1512,7 +1512,7 @@ $(document).ready(function(){
 									"openUrl"  : redirectUrl,
 									"openType" : "newPage",
 									"pageType" : "VIEW",
-									"pageKey": thisValue.attr("data-screen")?thisValue.attr("data-screen"):screenName,
+									//"pageKey": thisValue.attr("data-screen")?thisValue.attr("data-screen"):screenName,
 									"pageId": thisValue.attr("data-pageId")?thisValue.attr("data-pageId"):current_moduleId,
 									"recordCodes" : thisValue.attr("data-row-code"),
 									"pageContextParams":pageContextParams
@@ -1529,7 +1529,7 @@ $(document).ready(function(){
 						"openUrl"  : viewActions.openUrl,
 						"openType" : "newPage",
 						"pageType" : "VIEW",
-						"pageKey": thisValue.attr("data-screen")?thisValue.attr("data-screen"):screenName,
+						//"pageKey": thisValue.attr("data-screen")?thisValue.attr("data-screen"):screenName,
 						"pageId": thisValue.attr("data-pageId")?thisValue.attr("data-pageId"):current_moduleId,
 						"recordCodes" : thisValue.attr("data-row-code"),
 						"pageContextParams":pageContextParams
@@ -1687,7 +1687,7 @@ $(document).ready(function(){
 					    	     "openUrl"  : obj.returnObject.url,
 					    	     "openType" : "newPage",
 					    	     "pageType" : "VIEW",
-					    	     "pageKey": thisValue.attr("data-screen")?thisValue.attr("data-screen"):screenName,
+					    	     //"pageKey": thisValue.attr("data-screen")?thisValue.attr("data-screen"):screenName,
 					    	     "recordCodes" : thisValue.attr("data-row-code"),
 					    	     "pageContextParams":pageContextParams
 				    	   };
@@ -1701,4 +1701,117 @@ $(document).ready(function(){
 		 };
 		 ajaxCallBack(ajaxObject);
    }
+   
+   
+   
+   
+	baseGridActions.generateManageColumn  =  function(componentObject) {
+		var modalHtml = componentObject.modalHTML;
+		var blockWrapper = componentObject.blockWrapper;
+		var wrapperId = componentObject.wrapperId;
+		var getURL = componentObject.getURL;
+		var setURL = componentObject.setURL;
+		
+		$(".panel-grid-main").append(modalHtml);
+		//getModalPopUp(modalHtml);
+		
+		setTimeout(function(){
+			ajaxUrl = SetWebApiURL+getURL;
+			var ajaxObject = {
+					"ajaxURL" : ajaxUrl,
+					"params" : {"pageId" : current_moduleId,"gridKey":listGridDetails.gridKey},
+					"successCallback" : function(obj){
+							if(getResultCode(obj.resultCode) == CODE_SUCCESS){
+								var manageColumnConfig = obj.returnObject.manageColumnsConfig;
+								
+								var manageColumnConfig_column1 = [];
+								var manageColumnConfig_column2 = [];
+								
+								for(var i =0; i< manageColumnConfig.totalColumnCount; i++){
+									var columnValueObject = manageColumnConfig.columnValueObjects;
+									if(columnValueObject[i].isVisible == true){
+										manageColumnConfig_column1.push(columnValueObject[i]);
+									}else{	
+										manageColumnConfig_column2.push(columnValueObject[i]);
+									}
+								}
+								
+								var obj = {
+										'manageColumnConfig':manageColumnConfig_column1,
+										'blockWrapper': blockWrapper,
+										'listWrapper':"visible-columns",
+										'search':0
+									};
+								
+								baseGridActions.generateManageList(obj);
+								
+								var obj = {
+										'manageColumnConfig':manageColumnConfig_column2,
+										'blockWrapper': blockWrapper,
+										'listWrapper':"all-columns",
+										'search':0
+									};
+								baseGridActions.generateManageList(obj);
+								
+								baseFunctions.generateScrollbar(wrapperId+" ul");
+								$(wrapperId).find("[data-type = submit]").click(function(){
+									var output = {};
+									var iColumnOrder = 1;
+									if($(wrapperId).find("ul#visible-columns li").length == 0){
+										generateMsg(1,'select.one.column',global_lightbox_wrapper);
+										return false;
+									}
+									$(wrapperId).find("ul#visible-columns li").each(function() {
+										 var ci = $(this).attr("value");
+										 var co = $(this).data("order");
+										 if(typeof output["columnValueObjects"] == "undefined"){
+												output["columnValueObjects"] = [];
+											}
+											output["columnValueObjects"].push({
+												"columnId" 	  : ci,
+												"columnOrder" : iColumnOrder++		
+											});
+									});
+									var myString = JSON.stringify(output);
+									var gridContext = listGridDetails.gridDispKey+"-"+listGridDetails.gridKey;
+									
+									ajaxUrl = SetWebApiURL+setURL;
+									var ajaxObject = {
+											"ajaxURL" : ajaxUrl,
+											"params" : {"manageColumnsJson" : myString ,"pageId" : current_moduleId,"gridKey":listGridDetails.gridKey},
+											"successCallback" : function(data){
+												if(getResultCode(data.resultCode) == CODE_SUCCESS)
+												{
+													/*selected_page_records = $(page_records_selector).val();
+													var ajaxPaginationParams = {
+															"ajaxURL" 			: SetWebApiURL+'json/page-details.json',
+															"pageNo"  			: 1,
+															"recordsPerPage"	: selected_page_records,
+															"currentPage"		: 1,
+															"wrapperId"			: gridContext,
+															"loader" : true,
+															"loaderWrapper" : "#"+gridContext
+													};
+													baseGridActions.getPageDetails(ajaxPaginationParams);*/
+												}else{
+													generateMsg(data.resultCode,data.messageKey,global_lightbox_wrapper,"",data.responseDetail);
+												}
+											} ,
+											"failureCallback" : function(){},
+											"wrapperId"       : panel_grid_content_id,
+											"loader" : true,
+											"loaderWrapper" : wrapperId+" .modal-content"
+									};
+									ajaxCallBack(ajaxObject);
+								});
+								baseGridActions.manageColumnsActions(wrapperId);
+							}
+					},
+					"failureCallback" : function(){} ,
+					"loader" : true,
+					"loaderWrapper" : wrapperId+" ul"
+			};
+			ajaxCallBack(ajaxObject);
+		},200);
+	}
 })(window.baseGridActions = window.baseGridActions || {}, jQuery);

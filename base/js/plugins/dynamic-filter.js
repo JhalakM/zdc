@@ -60,7 +60,6 @@
              __trimInValue();
              __setDefaultFilter();
          	 $(self).find(".reset-filter").on("click",function(){
-         		// alert("hi");
          		__resetFilterRow(this);
          		$(filtered_criteria_text).html("")
          	 });
@@ -83,10 +82,6 @@
             
             // generate filter buttons
             __filterButtons();
-            
-//            if(screenName == "config"){
-//        		scopeDropDownGenerate();
-//        	}
             
             __filterAction();
         }
@@ -166,7 +161,7 @@
                         $(self).find("button[data-onfilter=show]").removeClass("hidden");
                         $(self).find("button[data-onaddmore=show]").addClass("hidden");
                         var ajaxObjectFilter = {
-                            "ajaxURL": filterDetailsUrl,
+                            "ajaxURL": SetWebApiURL+"json/filter-details-update.json",//filterDetailsUrl,
                             "params": {
                                 "filterId": liValue,
                                 "pageId": current_moduleId,
@@ -382,10 +377,6 @@
 
         var __filterAutoSuggest = function() {
         	var filterWrapperId = "#"+filterWrapper;
-            /*setTimeout(function() {
-                var searchValue = $(filterWrapperId+" .filter-searchvalue").find("[type=text][data-suggestion=true]");
-                __getAutoSuggest(searchValue);
-            }, 1000);*/
         	  var searchValue = $(filterWrapperId+" .filter-searchvalue").find("[type=text][data-suggestion=true]");
               __getAutoSuggest(searchValue);
               

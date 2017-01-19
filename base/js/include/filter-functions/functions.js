@@ -7,6 +7,77 @@
 		$(wrapper).find(".close").trigger("click");
 	}
 	
+	baseFunctions.getGridValue = function(key) {
+		if(isSet(gridDetails)){
+			for(var i = 0; i<gridDetails.length; i++)
+			{
+				  if(gridDetails[i].gridDispKey == key){
+				   return gridDetails[i];
+				  } 
+			}
+		}
+		return false;
+	}
+	
+	baseFunctions.generateAccordion =  function(accordionConfig,setAccordionWrapper) {
+		
+		var accordionId      	= accordionConfig.id;
+		var accordionClass  	= accordionConfig.className;
+		var accordionTitle   	= accordionConfig.title;
+		var accordion_key		= accordionConfig.accordion_key?accordionConfig.accordion_key:"";
+		var accordionWrapper 	= (!isSet(accordionConfig.id))?".accordion":"#"+accordionConfig.id+" .accordion:first";
+		var recordId		 	= accordionConfig.recordId;
+		var dataScreenAdd 	    = isSet(accordionConfig.dataScreenAdd)? accordionConfig.dataScreenAdd : "setting-template";
+		
+		var mainAccordion = $(accordion_main_block);
+		
+		mainAccordion.attr({"id" : accordionId, "recordId" : recordId, "data-screen-add": dataScreenAdd , "data-filter-context" : accordionConfig.filterContext,"data-accordionKey":accordion_key}).addClass(accordionClass);
+		mainAccordion.find(".accordion").append($(accordion_panel).prop("outerHTML"));
+		mainAccordion.find(".accordion-header h3").text(accordionTitle);
+		mainAccordion.find(".accordion-content").append(accordion_content_panel);
+		
+		if(!isSet(accordionConfig.allowFilter)){
+			mainAccordion.find(".accordion-filter-wrapper:first").append(filter_block);
+		}
+		if(!isSet(accordionConfig.subContent) || accordionConfig.subContent !=true ){
+			if(setAccordionWrapper == undefined){
+				setAccordionWrapper = panel_accordion_wrapper;
+			}
+			$(setAccordionWrapper).append(mainAccordion.prop("outerHTML"));
+		}else{
+			var parentAccordionId 	= "#"+accordionConfig.parentId;
+			$(parentAccordionId).find(".accordion-content-wrapper:first").append(mainAccordion.prop("outerHTML"));
+		}
+		baseFunctions.accordionLoad(accordionWrapper);
+		
+	}
+	
+	baseFunctions.defaultOpenAccordion =  function() {
+	    $(".openAccordionClass").each(function() {
+	    	$(this).find(".accordion-panel h3").trigger("click");
+	    });
+	}
+	
+	baseFunctions.accordionLoad = function(accordionSelector) {
+		$(accordionSelector).find(".accordion-content").hide();
+		$(accordionSelector).find(".accordion-panel.active").children(".accordion-content").show();
+	        $(accordionSelector).find(".accordion-header:first .accordion-title").click(function() {
+	        	var $this = $(this).parents(".accordion-header");
+	            if ($this.closest(".accordion-panel").hasClass("active")) {
+	                $this.closest(".accordion-panel").addClass("accordion-close");
+	                $this.closest(".accordion-panel").removeClass("active");
+	                $this.siblings(".accordion-content").slideUp();
+	            } else {
+	                $(".accordion-panel").addClass("accordion-close");
+	                $this.closest(".accordion-panel").removeClass("accordion-close");
+	                $this.closest(".accordion-panel").addClass("active");
+	                $this.siblings(".accordion-content").slideDown();
+	            }
+	            $(window).resize();
+	    });
+	        
+	}
+
 	/* function for convert date in given format or return non-date value as it is */
 	baseFunctions.formatComputation =  function(format,dateRange,value,currFormat) {
 		var validFormat = 0;

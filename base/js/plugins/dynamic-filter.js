@@ -420,7 +420,7 @@
                         var lastEl = InString[InString.length - 1];
                         lastEl = operator_selected == "IN" ? lastEl : query;
                         return {
-                            pageId: screenName,
+                            pageId: 1,
                             filterColumnName: fc,
                             filterOperator: fo,
                             filterValue: lastEl.toUpperCase(),

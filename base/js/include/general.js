@@ -218,7 +218,7 @@ function getTemplateParams() {
 /* function to generate dynamic dropdwn for language and set language on dropdown change */
 function languageDdAction(wrapper){
 	if(wrapper == undefined)
-		wrapper = "header .language";
+		wrapper = ".language";
 	
 	var languages = {
 			"zh-cn" : i18NCall("lang_chinese_title"),

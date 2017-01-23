@@ -7,35 +7,8 @@
 	baseFunctions.appendAddFormHTML =  function() {
 		// Append addmore html
 		$(selector_panel_block_head_content).append(add_more_block);
-	},
+	}
 	
-	baseFunctions.appendEditFormHTML =  function(lbFlag) {
-		if(lbFlag == 1){
-			if ($(selector_content_section).find(batchupdate_form_block_selecter).length){
-				$(selector_content_section).find(batchupdate_form_block_selecter).remove();
-			}
-			var batch_update_lightbox_block_html = $(batchupdate_lightbox_block);
-			$($(batch_update_lightbox_block_html).prop("outerHTML")).appendTo(selector_content_section);
-		}else{
-			// Append editmore html
-			$(selector_panel_block_head_content).append(edit_more_block);
-		}	
-	},
-	
-	baseFunctions.appendViewFormHTML =  function(lbFlag) {
-		// Append addmore html
-		$(selector_panel_block_head_content).append(view_more_block);
-	},
-	
-	baseFunctions.generateListRecords =  function() {
-		$(document).delegate('.app-action-group  a[data-rel = app-action-form-listview]','click touchend',function(){
-			var openType = $(this).attr("data-openType");
-			if(openType == "newPage"){
-				window.location = SetWebURL+$(this).attr("data-openUrl");
-				return false;
-			}
-		});
-	},
 	
 	/** generate add records **/
 	baseFunctions.generateAddRecords =  function() {
@@ -58,60 +31,8 @@
      		if(openType != "undefined")
      			baseFunctions.setSelectedRecords(redirectConfig,"baseFunctions.setSelectedAddScreen");
      	});
-	},
-	baseFunctions.generateDeatilAction = function(detailActions){
-		$(document).undelegate(".detail-action","click touchend");
-		$(document).delegate(".detail-action","click touchend", function(){
-			var dynamicPopUpId = $(this).attr("data-gridkey");
-			if($("#"+dynamicPopUpId).length > 0){
-				$("#"+dynamicPopUpId).remove();
-			}
-			var subMenuHTML = "";
-			var getMainHTML = $(grid_all_action_submenu_block);
-			getMainHTML.attr("id",dynamicPopUpId);
-			if(isSet(detailActions)){
-				var subMenuHTML_1 = $(grid_all_action_submenu_title_block);
-				var subGridActionHTML_1 = baseFunctions.setDtailActionAttr(detailActions);
-				subMenuHTML_1.find(".owl-carousel").append(subGridActionHTML_1);
-				subMenuHTML += $(subMenuHTML_1).prop("outerHTML");
-			}
-			getMainHTML.find(".action-box").append(subMenuHTML);
-			getModalPopUp(getMainHTML);
-			baseGridActions.closeActionPopUp(dynamicPopUpId);
-			setTimeout(function(){
-				baseGridActions.subGridCarouselMenu();
-			},300);
-			$('body').css("padding-right", "0px");
-		});
-	},
-	baseFunctions.setDtailActionAttr =  function(detailActions) {
-		var grid_actions_group_link = "";
-		var grid_actions_group_html = "";
-		for(var  i = 0; i< detailActions.length; i++){
-			var fireAction = detailActions[i];
-			var className = fireAction.actionName.replace("Action", "-action");
-			if(isSet(fireAction.actionName)){
-				if(fireAction.isState){
-					grid_actions_group_link = $(grid_all_action_submenu_content_block);
-					
-					grid_actions_group_link.find("a").attr({
-						"data-openUrl"  :  fireAction.openUrl,
-						"data-openType" : fireAction.openType,
-						"data-max-records" : fireAction.maxRecords,
-						"href" :"javascript:void(0);",
-						"data-min-records" : fireAction.minRecords
-					}).addClass(className.toLowerCase()+" action-popup-close");
-					grid_actions_group_link.find("span.action-title").text(i18NCall(fireAction.tooltipKey));
-					var functionCallback = "details_"+fireAction.actionName;
-					if(window[current_zodiac+"Functions"][functionCallback]){
-						window[current_zodiac+"Functions"][functionCallback](fireAction);
-					}
-					grid_actions_group_html += grid_actions_group_link.prop("outerHTML");
-				}
-			}
-		}
-		return grid_actions_group_html;
-	},
+	}
+	
 	baseFunctions.generateAddFetchForm =  function(elementWrapper,lbFlag,redirectConfig) {
 		var elementId = "#"+elementWrapper;
 		
@@ -119,10 +40,10 @@
 		
 		var openUrl = isSet(redirectConfig.openUrl)?redirectConfig.openUrl+"/":"";
 		var pageIdAdd  = isSet(redirectConfig.pageId)?redirectConfig.pageId:current_moduleId;
-		var screenNameAdd = isSet(redirectConfig.pageKey)?redirectConfig.pageKey:screenName;
+		var screenNameAdd = isSet(redirectConfig.pageKey)?redirectConfig.pageKey:"";//screenName;
 		
 		if($(elementId).find("form").length==0){
-			var ajaxUrl = SetWebApiURL+openUrl+"add-form";
+			var ajaxUrl = SetWebApiURL+openUrl+"json/add-form.json";
 			var ajaxObject = {
 					"ajaxURL" : ajaxUrl,
 					"params" : {"pageId" :pageIdAdd, "pageName":"ADD", "pageKey" : screenNameAdd,"accordionKey":""},
@@ -139,7 +60,42 @@
 			getAutoFocus("#"+$(elementId).find("form").attr("id"));
 		}
 	},
-
+	
+	/* function to call dynamic form plugin for success */
+	/*baseFunctions.generateAddmoreFormSuccess =  function(json_data,wrapperId) {
+		var wrapper = "#"+wrapperId;
+		var formInfoData = json_data.returnObject.formInfo;
+		if (getResultCode(json_data.resultCode) == CODE_SUCCESS) {
+			var groupProperty = formInfoData.hasOwnProperty("formGroups");
+			var elementProperty = formInfoData.hasOwnProperty("formElements");
+			if(groupProperty == false || elementProperty == false ){
+				return false;
+			}
+			$(wrapper).dynamicForm({
+				formObject : json_data.returnObject,
+				callback : function(msg,dataArray){
+					$(wrapper).validate({
+						validation : dataArray.isValidation,
+						optionalObj	: dataArray.optionalWarningObj,
+						callback : function(object){
+							selected_page_records = $(page_records_selector).val();
+							var ajaxPaginationParams = {
+									"ajaxURL" 			: SetWebApiURL+'page-details',
+									"pageNo"  			: 1,
+									"recordsPerPage"	: selected_page_records,
+									"currentPage"		: 1,
+									"wrapperId"			: panel_grid_content_id,
+									"loader" : true,
+									"loaderWrapper" : panel_grid_wrapper
+							};
+							baseGridActions.getPageDetails(ajaxPaginationParams);
+						}
+					});
+				}
+			});
+		}
+	},*/
+	
 	baseFunctions.generateAddmoreFormSuccess = function(json_data,wrapperId,lbFlag){
     	var wrapperId = "#"+wrapperId;
     	var formInfoData = json_data.returnObject.formInfo;
@@ -187,6 +143,28 @@
     	}
     } 
 	
+	baseFunctions.generateBatchEditFetchForm =  function(wrapperId,lbFlag,redirectConfig) {
+		
+		if(!isSet(redirectConfig)) redirectConfig = {};
+		
+		var openUrl = isSet(redirectConfig.pageKey)?(redirectConfig.pageKey.toLowerCase())+"/":"";
+		var pageIdAdd  = isSet(redirectConfig.pageId)?redirectConfig.pageId:current_moduleId;
+		var screenNameAdd = isSet(redirectConfig.pageKey)?redirectConfig.pageKey:screenName;
+		
+		var ajaxUrl = SetWebApiURL + openUrl + "batch-edit-form";
+		var ajaxObject = {
+				"ajaxURL" : ajaxUrl,
+				"params" : {"pageId" :pageIdAdd, "pageKey" : screenNameAdd,"pageName": "EDIT","accordionKey":""},
+				"successCallback" : function(object){
+					baseFunctions.generateBatchupdateFormSuccss(object,wrapperId,lbFlag);
+				},
+				"failureCallback" : generateFailure,
+				"loaderWrapper"	  : "."+$("body").attr("class"),
+				"loader"		  : true,
+				"wrapperId" 	  : wrapperId
+		};
+		ajaxCallBack(ajaxObject);
+	},
 	baseFunctions.accordion = function(accordionDto,accordionWrapper,hasSub){
 	  	  if(isSet(accordionDto)){
 	  	 		for(var i=0; i<accordionDto.length; i++){
@@ -263,6 +241,156 @@
 				baseFunctions.editAccordionAction();
 		}
 	}
+	baseFunctions.generateAccordionBatchEditFetchForm =  function(wrapperId,lbFlag,pageContextParams) {
+		var ajaxUrl = SetWebApiURL+"batch-edit-form";
+		var ajaxObject = {
+				"ajaxURL" : ajaxUrl,
+				"params" : {"pageId" :current_moduleId, "pageKey" : screenName,"pageName": "EDIT","accordionKey":""},
+				"successCallback" : function(object){
+					baseFunctions.generateBatchupdateFormSuccss(object,wrapperId,lbFlag);
+					 
+				},
+				"failureCallback" : generateFailure,
+				"wrapperId" 	  : wrapperId
+		};
+		ajaxCallBack(ajaxObject);
+	},
+	
+	/* function for batch update success */
+	baseFunctions.generateBatchupdateFormSuccss =  function(json_data,wrapper,lbFlag) {
+		var wrapperId = "#"+wrapper;
+		var formWrapper = $(wrapperId).find("form").attr("id");
+		if (getResultCode(json_data.resultCode) == CODE_SUCCESS) {
+			var formInfoData = json_data.returnObject.formInfo;
+			var groupProperty = formInfoData.hasOwnProperty("formGroups");
+			var elementProperty = formInfoData.hasOwnProperty("formElements");
+			if(groupProperty == false || elementProperty == false ){
+				return false;
+			}
+	
+			var lightBox = false;
+			if(lbFlag == 1){
+				getModalPopUp(batchupdate_form_block_selecter);
+				getAutoFocus(batchupdate_form_block_selecter);
+			//	$(app_action_form_addmore_wrapper).hide();
+				$(".app-action-group a.add-more").removeClass('active');
+				var formHTML = $(div_form_element).appendTo(batchupdate_form_content_selecter);
+				$(formHTML).attr({"id" : wrapperId });
+				lightBox = true;
+			}
+			
+			var selectedRecords = json_data.returnObject.formInfo.selectedValues;
+			
+			$(document).find(".selected-records").remove();
+			var seletedRecordBlock = $(selected_record_block);
+			
+			var accordionSelectedRecord = "accordionSelectedRecord-1";
+			var accordionConfig = {
+				"id"    	  : accordionSelectedRecord,
+				"className"   : "app-action-form openAccordionClass",
+				"title"       : i18NCall("selected_records_accordion_title"),
+				"allowFilter" : false,
+			}
+			baseFunctions.generateAccordion(accordionConfig,$(seletedRecordBlock));
+			
+			$(seletedRecordBlock).find(".accordion-form-wrapper").append(ele_checkbox);
+			
+			var actionRadio = $(action_select_records);
+			$(actionRadio).find("#radio1").attr("checked","checked");
+			$(seletedRecordBlock).find(".accordion-form-wrapper").prepend(actionRadio);
+			
+			checkHTML =  $(wrapperId).prepend($(seletedRecordBlock).prop("outerHTML"));	
+			baseFunctions.accordionLoad("#"+accordionSelectedRecord);
+			
+			for(var i = 0; i<selectedRecords.length;i++){
+				inputClone = document.createElement(selector_input);
+				labelClone = document.createElement(selector_label);
+				$(inputClone).attr({
+					"name"    : 'selectedRecords',
+					"type"    : 'checkbox',
+					"data-type" : 'checkbox',
+					"value"	  : selectedRecords[i].value,
+					"id"	  : "selectedRecords-"+i,
+					"class"	  : class_css_checkbox+" is-edited",
+					"checked" : 'checked',
+					"data-init-value" : selectedRecords[i].value,
+					"data-row-code":selectedRecords[i].recordCode,
+					"data-row-version":selectedRecords[i].version,
+					"data-row-parentrecordcode":selectedRecords[i].parentRecordCode
+				});
+				
+				if($(checkHTML).find(selector_checkbox).length<=1){
+					$(checkHTML).find(selector_checkbox).attr({
+						"data-type"    : 'checkbox',
+						"data-name"    : 'selectedRecords'
+					});
+					$(checkHTML).find(selector_checkbox).append(inputClone);
+					$(labelClone).attr({
+						"for"	  : "selectedRecords-"+i
+					}).text(selectedRecords[i].labelKey);
+					$(labelClone).addClass('css-label');
+					$(checkHTML).find(selector_checkbox).append(labelClone);
+					if(selectedRecords.length > 1 ){
+						$(checkHTML).find(".selected-records").show();
+					}else{
+						$(checkHTML).find(".selected-records").hide();
+					}
+				}
+			}
+			var getReturnObject = baseFunctions.setCommonAjaxConfig(wrapperId);
+			var getPkValues;
+			var pageContextParams = [];
+			if(selectedRecords.length > 0){
+				var col = [];
+				var colCode = [];
+				
+				$(wrapperId).find( ".selected-records .checkbox input[type='checkbox']:checked" ).each(function( index ) {
+					if($(this).prop("checked")==true){
+						var recordId 		= $(this).val();
+						var recordCode	  	= $(this).attr("data-row-code");
+						var recordVersion   = $(this).attr("data-row-version");												
+						var parentrecordcode   = $(this).attr("data-row-parentrecordcode");
+						pageContextParams.push({ "recordId" : recordId , "code" : recordCode, "version": recordVersion,"parentRecordCode":parentrecordcode });
+					}
+				});
+				var myString = JSON.stringify(col);
+				var recordCodes = JSON.stringify(colCode);
+				getPkValues = myString;
+			}else{			
+				pageContextParams = getReturnObject.colObject;
+			}
+			var hiddenPeraArray = pageContextParams;
+			var message = {
+					"message" : "batch.update.alert.message",
+					"params"  : selectedCheckboxLength
+			};
+			$(wrapperId).dynamicForm({
+				formObject : json_data.returnObject,
+				lightBoxFlag   : lightBox,
+				callback : function(msg,dataArray){
+					$(wrapperId).validate({
+						validation : dataArray.isValidation,
+						optionalObj	: dataArray.optionalWarningObj,
+						hiddenParams: hiddenPeraArray,
+						alert	   		: true,
+						alertMessage	: message,
+						editMode        : true,//dataArray.editMode,
+						callback : function(){
+						
+						}
+					});
+				}
+			});
+			
+			/*setTimeout(function(){
+				if(lbFlag == 1 && $(wrapperId).find(scroll_wrapper+" :input").length >= 10 || $(window).width() <= 660){
+					baseFunctions.generateScrollbar($(wrapperId).find(scroll_wrapper));
+				}
+			},250);*/
+		}else{
+			generateMsg(json_data.resultCode,json_data.messageKey,global_message_wrapper,"",json_data.responseDetail);
+		}
+	},
 	
 	baseFunctions.checkSelectedRecord =  function(formId) {
 		if($(formId).find(".selected-records").length > 0){
@@ -398,12 +526,182 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 	        pickDate: false,
 	        pick12HourFormat: hourFormat
 	  });
+	},
+	
+	/** generate dashboard **/
+	baseFunctions.generate_dashboard = function(response_object)
+	{
+	  	if(getResultCode(response_object.resultCode) == CODE_BUSINESS){
+	  		genLogout();
+	  		generateErrorMsg(response_object.resultCode,response_object.messageKey,login_form_block_wrapper)
+	  	}
+	  	if(getResultCode(response_object.resultCode) == CODE_SUCCESS){
+	  		$(selector_content_section).append(right_panel);
+	  		$(selector_panel_block_content).append(dashboard_main_block);
+	  		var dashboard_module_block_html = $(dashboard_module_block);
+	  		
+	  		var dahsboardConfig = response_object.returnObject.homeConfig;
+	  		
+	  		if(dahsboardConfig.dashboardGroup ==  true){
+	  			
+	  			baseFunctions.newDashboard(dahsboardConfig.navigationConfig);
+	  		}else{
+	  			var sortMenuObj = dahsboardConfig.navigationConfig; 
+	  			sortMenuObj = sortString(sortMenuObj,"title",1);
+	  			
+	  			$.each(sortMenuObj, function(key,value){
+	  				dashboard_module_block_html.find('a').attr({
+	  																"href": (value.isAjaxReq == true)?"javascript:void(0);":value.link,
+	  																"data-ajaxReq" : value.isAjaxReq,
+	  																"data-newWindow" : value.isNewWindow,
+	  																"rel"  			: value.link
+	  														   });
+	  				dashboard_module_block_html.find('h3').html(i18NCall(value.title));
+	  				var fav = $(favorites_icon);
+		  			
+		  			if(isSet(value.isFavourite) && value.isFavourite == true)
+		  				$(fav).addClass("selected");
+		  				
+		  			$(fav).attr("data-favouriteId",(value.favouriteId?value.favouriteId:""));
+	  				$(fav).insertAfter($(dashboard_module_block_html).find('h3'));
+	  				
+	  				var iconName=value.iconName;
+	  				var iconName_text=iconName.replace(".svg","");
+	  				var iconName_hover_text=iconName_text+"-hover";
+	  				var iconName_hover=iconName.replace(iconName_text,iconName_hover_text);
+	  				
+	  				var icon = getImagePath("base/img/icons/"+iconName,"");
+					var icon_hover = getImagePath("base/img/icons/"+iconName_hover,"hover");
+	  				
+	  				dashboard_module_block_html.find('img.image').attr("src",icon);
+	  				dashboard_module_block_html.find('img.image.hover').attr("src",icon_hover);
+	  		
+	  				dashboard_module_block_html.find(module_block_wrapper).addClass("dash-"+value.className);
+	  				$(module_blocks_wrapper).append($(dashboard_module_block_html).prop("outerHTML"));
+	  			});
+	  		}
+	  		baseFunctions.setFavourite();
+	  	}
 	}
+	baseFunctions.newDashboard = function(dahsboardConfig){
+		
+	  	var dashboardBlock = $(new_dashboard_block);
+	  	$.each(dahsboardConfig, function(key,value){
+	  		var dashboard_group = $(dashboard_group_block);
+	  		var group_title = i18NCall(value.groupName);    
+	  		var group_icon   = value.groupIcon;
+	  		var group_config = value.groupConfig;
+	  		var dashboard_module_block_html = "";
+	  		$(dashboard_group).find(".dashboard-group-title .nav-title span").text(group_title);
+	  		var panelIcon = getImagePath("base/img/icons/"+group_icon,"panel");
+	  		$(dashboard_group).find(".dashboard-group-title .nav-title span").text(group_title);
+//	  		$(dashboard_group).find(".dashboard-group-title .nav-title i img").attr("src","base/img/icons/"+group_icon);
+	  		var counts = 1;
+	  		$.each(group_config, function(key,value){
+	  			dashboard_module_block_html = $(dashboard_box_block);
+	  			var newWindow = "";
+	  			if(value.isNewWindow == true){
+	  				newWindow  = "_blank"
+	  			}
+	  			dashboard_module_block_html.find('a').attr({
+	  															"href": (value.isAjaxReq == true)?"javascript:void(0);":value.link,
+	  															"data-ajaxReq" : value.isAjaxReq,
+	  															"data-newWindow" : value.isNewWindow,
+	  															"rel"  			: value.link,
+	  															"target":newWindow
+	  													   });
+	  			dashboard_module_block_html.find('h3').html(i18NCall(value.title));
+	  			var fav = $(favorites_icon);
+	  			
+	  			if(isSet(value.isFavourite) && value.isFavourite == true)
+	  				$(fav).addClass("selected");
+	  				
+	  			$(fav).attr("data-favouriteId",(value.favouriteId?value.favouriteId:""));
+  				$(fav).insertAfter($(dashboard_module_block_html).find('h3'));
+  				
+	  			var iconName=value.iconName;
+	  			var iconName_text=iconName.replace(".svg","");
+	  			var iconName_hover_text=iconName_text+"-hover";
+	  			var iconName_hover=iconName.replace(iconName_text,iconName_hover_text);
+	  			
+	  			var icon = getImagePath("base/img/icons/"+iconName,"");
+				var icon_hover = getImagePath("base/img/icons/"+iconName_hover,"hover");
+	  			dashboard_module_block_html.find('img.image').attr("src",icon);
+	  			dashboard_module_block_html.find('img.image.hover').attr("src",icon_hover);
+	  			
+	  			/*dashboard_module_block_html.find('img.image').attr("src","base/img/icons/"+iconName);
+	  			dashboard_module_block_html.find('img.image.hover').attr("src","base/img/icons/"+iconName_hover);*/
+	  	
+	  			dashboard_module_block_html.find(module_block_wrapper).addClass("dash-"+value.className);
+	  			if(value.isMajor == true){
+	  				dashboard_module_block_html.addClass("col-md-12");
+	  			}
+	  			else{
+	  				dashboard_module_block_html.addClass("col-md-6");
+	  				if((parseInt(counts) % 2) == 0){
+	  					dashboard_module_block_html.addClass("last");
+	  				}
+	  				counts++;
+	  			}
+	  			$(dashboard_group).find(".dash-box").append($(dashboard_module_block_html).prop("outerHTML"));
+	  		});
+	  		$(dashboardBlock).find(".masonry-grid").append($(dashboard_group).prop("outerHTML"));
+	  		
+	  	});
+	  	$(module_blocks_wrapper).append($(dashboardBlock).prop("outerHTML"));
+	  	$('.masonry-grid').masonry({
+	  	  itemSelector : '.dash-content'
+	  	});
+	}
+	
+	baseFunctions.setFavourite =  function() {
+		var flag = 0;
+		$(document).undelegate(".fav-selector","click");
+		$(document).delegate(".fav-selector","click",function(){
+			if(flag == 0){
+				flag = 1;
+				var this_val = $(this);
+				var isCurrent = ($(this).hasClass("selected") == true)?false:true;
+				var favouriteid = $(this).attr("data-favouriteid");
+				var ajaxUrl = SetWebApiURL + "mark-favourite";
+				var ajaxObject = {
+						"ajaxURL" : ajaxUrl,
+						"params" : { "isFavourite" : isCurrent,"moduleId":favouriteid },
+						"successCallback" : function(object){
+							if(getResultCode(object.resultCode) == CODE_SUCCESS){
+								$(this_val).toggleClass('selected');
+								basePanel.headerFavorites(object.returnObject);
+								flag = 0;
+							}
+						},
+						"failureCallback" : generateFailure,
+						"wrapperId" 	  : "",
+				};
+				ajaxCallBack(ajaxObject);
+			}
+		});
+	}
+	baseFunctions.generate_changePassword =  function() {
+		var setChangePassForm = $(set_password_html_block);
+		setChangePassForm.appendTo(selector_panel_block_content);
+		var formWrapper = "#frmSetpass";
+		$(formWrapper).captchaWord();
+		$(document).delegate('.refresh-captcha','click',function(){
+			$(formWrapper).captchaWord();
+			$(formWrapper).find('#captcha_input').val('');
+		});
+		
+		$(formWrapper).validate({
+			validation : true,
+			redirectPage : true,
+			redirectURL : "/dashboard"
+		});
+	},
 	
 	baseFunctions.resetFormData =  function(wrapperId) {
 		var resetWrapper = $(wrapperId).find("form [type=reset]");
 		resetWrapper.trigger("click");
-	}
+	},
 	
 	baseFunctions.checkDependency = function(formId,jsonObj){
 		var formWrapperId = "#"+formId;
@@ -726,7 +1024,7 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 				}
 			}
 		});
-	}
+	},
 	
 	baseFunctions.updateFormDetails =  function(formWrapper) {
 		$(formWrapper).find(" :input:not([id^=set_empty_])").change(function(){
@@ -769,8 +1067,15 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 							clubByArray.push(value.labelKey);
 							output[clubByAttr].push(value);
 						}
+//						output[clubByAttr].push(value);
 					}
-				}	
+				}
+			/*}else{
+				if($(this).attr("readonly")){
+					output[key] = value;
+				}
+			}*/
+			
 		});
 		
 		
@@ -817,7 +1122,9 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 			{
 				value 		 = set_empty_value;
 				imgDataValue = set_empty_value;
-			}
+			}/*else if(!$(this).hasClass("is-edited")){
+				editedFlag = 0;
+			}*/
 			if(editedFlag == 1){
 				if(!isSet($(this).attr("data-clubby"))){
 					if($(this).attr("type") != "file"){
@@ -839,6 +1146,7 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 						clubByArray.push(value.labelKey);
 						output[clubByAttr].push(value);
 					}
+//					output[clubByAttr].push(value);
 				}
 			}
 		});
@@ -1053,6 +1361,7 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 		return false;
 	},
 	baseFunctions.errorAndSuccessRecordsInformation = function(obj){
+//		obj = {"errorCode":1,"errorMessageKey":"error.n0","successMessageKey":"user.update.record.success","returnObject":{"successRecords":{"labelKey":"user.userId","values":["111","112","113"]},"errorRecords":{"rowConfig":[{"recordId":1000000272807,"recordCode":"User_Create","version":34,"record":[{"columnNo":1,"value":"User_Create"},{"columnNo":2,"value":"error.n1000018"}],"rowDisplayNm":0}],"columnConfig":{"totalColumnCount":0,"columnValueObjects":[{"columnNameKey":"user.userId","isPK":false,"sortOrder":0,"columnNo":1,"isSortable":false,"columnName":"CODE","colWidth":0,"columnId":0},{"columnNameKey":"error.reason","isPK":false,"sortOrder":0,"columnNo":2,"isSortable":false,"columnName":"REASON","colWidth":0,"columnId":0}]}}}};
 		var successRecords = obj.returnObject.successRecords;
 		var errorRecords = obj.returnObject.errorRecords;
 		$("#batchupdate-success-records ,#batchupdate-error-records").html(" ");
@@ -1102,7 +1411,11 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 			
 			var errorMesage = i18NCall(errorKeyName)+" <br/> ";
 			generateFieldMsg(1,className,errorMesage,fieldName,formId);
-
+			
+			/*setTimeout(function() {
+				console.log($(formId + " [name = '" + fieldName + "']").closest(selector_p_r_5).find(".error-message"));
+				$(formId + " [name = '" + fieldName + "']").closest(selector_p_r_5).find(".error-message").addClass("border-none");
+			}, 250);*/
 			addBorderClass(formId,fieldName);
 			
 			var lableName = $(formId).find("[name = "+fieldName+"],[data-name = "+fieldName+"]").closest(".form-row").find("label").html();
@@ -1113,6 +1426,9 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 				"message" : errorKeyName,
 			});
 		});
+		/*if(typeof fieldName != "undefined"){
+			method.generateError(1,returnErrorObj);
+		}*/
 	},
 	baseFunctions.createWarningObject =  function(jsonObject,className) {
 		var returnWarningObj = {};
@@ -1141,6 +1457,9 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 				"message" : errorKeyNames,
 			});
 		});
+		/*if(typeof fieldNames != "undefined"){
+			methods.generateError(2,returnWarningObj);
+		}*/
 	},
 	
 	baseFunctions.saveAndAssign =  function(formId) {
@@ -1345,7 +1664,33 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 			}
 			generateMsg(1,msg,message_wrapper);
 		}
-	}
+	},
+	
+	baseFunctions.redirectDesktopZodiac =  function() {
+		$(document).delegate("[data-ajaxReq = true]","click", function(){
+			var getLink = $(this).attr("rel");
+			var newWindow = $(this).attr("data-newWindow");
+			var ajaxObject = {
+					"ajaxURL" : getLink,
+					"method"  : "GET",
+					"aSync"  : false,
+					"successCallback" : function(obj){
+						if(getResultCode(obj.resultCode) == CODE_SUCCESS){
+							if(newWindow){
+								window.open(obj.returnObject);
+							}else{
+								location.href = obj.returnObject;
+							}
+						}else{
+							generateMsg(obj.resultCode, obj.messageKey,global_message_wrapper,"",obj.responseDetail);
+						}
+					},
+					"failureCallback" : generateFailure,
+			};
+			ajaxCallBack(ajaxObject);
+			return false;
+		});
+	},
 	
 	baseFunctions.checkTotalCheckedCount =  function(elementWrapperId,messageInfo) {
 		var totalCount = $(elementWrapperId).find(".table-record .checkbox input[type='checkbox']:checked").not(".css-checkbox-all").length;
@@ -1579,14 +1924,13 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 				baseFunctions.setSelectedRecords(redirectConfig);
 			}
 		});
-	}
+	},
 
 	baseFunctions.defaultOpenAccordion =  function() {
 	    $(".openAccordionClass").each(function() {
 	    	$(this).find(".accordion-panel h3").trigger("click");
 	    });
-	}
-	
+	},
 	baseFunctions.accordionLoad = function(accordionSelector) {
 		$(accordionSelector).find(".accordion-content").hide();
 		$(accordionSelector).find(".accordion-panel.active").children(".accordion-content").show();
@@ -1773,6 +2117,21 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 		$(selector).jScrollPane().data().jsp.destroy();
 	}
 	
+	/*baseFunctions.addAccordionAction = function(actions,getRecordId){
+		$(document).undelegate(".accordion-action-add","click touchend");
+		$(document).delegate(".accordion-action-add","click touchend",function(){
+			var thisPageKey = $(this).parents(".app-action-form").attr("data-screen-add") != "" ? $(this).parents(".app-action-form").attr("data-screen-add") : "setting-template";  
+			var redirectConfig = {
+					"recordId" : getRecordId,
+					"openUrl"  : actions.openUrl,
+					"openType" : actions.openType,
+					"pageType" : "ADD",
+					"pageKey"  : thisPageKey,
+					"pageContextParams": JSON.stringify([{"recordId":getRecordId}])
+			};
+			baseFunctions.setSelectedRecords(redirectConfig);
+		});
+	}*/
 	baseFunctions.editAccordionAction = function(){
 		
 		$(document).undelegate(".accordion-action-edit","click touchend");
@@ -1802,6 +2161,38 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 		});
 	}
 	baseFunctions.getEditableContent = function(accordionPanel){
+		 
+/*		  if(accordionPanel.hasClass("active") == false){
+		   accordionPanel.find(".accordion-content").slideDown();
+		   accordionPanel.addClass("active");
+		  }
+		  
+		  if(accordionPanel.hasClass("edit-content") == false){
+//			   accordionPanel.addClass("edit-content");
+			  
+			 //  accordionPanel.find(".none-edittable-label").hide();
+			 //  accordionPanel.find(".p-r-5").show();
+			   accordionPanel.find(".hide-elements").show();
+			 //  accordionPanel.find(".center-btn button").show();
+			   
+//			   $(accordionPanel).addClass("normal-form");
+			   $(accordionPanel).removeClass("view-form");
+			   $(accordionPanel).find(".view-only-form").hide();
+			   $(accordionPanel).find(".edit-only-form").show();
+			   
+		  }else{
+			  
+//			   $(accordionPanel).addClass("view-form");
+//			   $(accordionPanel).removeClass("normal-form");
+			   
+//			   accordionPanel.removeClass("edit-content");
+			   $(accordionPanel).find(".view-only-form").show();
+			   $(accordionPanel).find(".edit-only-form").hide();
+			  // accordionPanel.find(".none-edittable-label").show();
+			  // accordionPanel.find(".p-r-5").hide();
+			   accordionPanel.find(".hide-elements").hide();
+			  // accordionPanel.find(".center-btn button").hide();
+			  }*/
 			  datepickerLoad();
 	}
 	baseFunctions.isEditForm = function(accordionKey,wrapperId){
@@ -1910,8 +2301,7 @@ baseFunctions.datePicker =  function(datePicId,addParams) {
 		 }else{
 			 generateMsg(json_data.resultCode,json_data.messageKey,global_message_wrapper,"",json_data.responseDetail);
 		 }
-	}
-	
+	},
 	baseFunctions.generateAccordionListMenu = function(accordionDetails){
 		$(".list-dp-menu").remove();
 		var accordionPanelIcon = $(panel_accordion_list_icon);
@@ -2426,29 +2816,10 @@ baseFunctions.setCustomMultiFileData = function(fileId)
 				 uploadedSize = (uploadedSize - lessSize);
 				 var cons = $(this).closest('.multiple_upload').remove();
 				 
+//				 $(fileId).parents(".selected-file-name").removeClass("error-input-box");
+//				 $(fileId).parents(selector_p_r_5).find(selector_error_message).remove();
 			 }
 		 });
 	}
-	
-	
-	baseFunctions.appendViewFormHTML();
-		var wrapperId = 'view_visit_summary';
-		var ajaxSummaryUrl = SetWebApiURL + "visit-summary";
-		var ajaxObject = {
-				"ajaxURL" : ajaxSummaryUrl,
-				"params" : {"code" :accordionConfigs.contextParams.code},
-				"successCallback" : function(object){
-					coreVesselVisit.generateVesselVisitSummary(object,'view_visit_summary');
-				},
-				"failureCallback" : generateFailure,
-				"wrapperId" 	  : wrapperId,
-		};
-		ajaxCallBack(ajaxObject);
-		 setTimeout(function(){
-			  baseFunctions.accordion(accordionConfigs.accordion,panel_accordion_wrapper,false);
-			  coreVesselVisit.viewPageGeneralFunctionality();
-		 },800);
-	
-	
 	
 })(window.baseFunctions = window.baseFunctions || {}, jQuery);

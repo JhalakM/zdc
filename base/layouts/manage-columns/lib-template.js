@@ -31,9 +31,9 @@ var modalDialogPopup 										= '<div class="modal-dialog alert-popup" style="d
 var grid_manage_columns_body 	= '<div class="" id="manage-columns" role="dialog"  tabindex="-1">'+
 								'<div class="manage-columns">'+
 									'<div class="modal-content">'+
-										'<div class="modal-header">'+
+										/*'<div class="modal-header">'+
 											'<h4 class="modal-title">'+i18NCall("add.remove.column.label")+'</h4>'+
-										'</div>'+
+										'</div>'+*/
 										global_lighbox_block+
 										'<div class="modal-body-content">'+
 											'<div class="columns-list-box">'+

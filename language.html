@@ -7,24 +7,21 @@
       <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <!-- Favicon icon -->
-      <title>Zodiac - Accordion & Switching Demo</title>
+      <title>ZCS - Language Demo</title>
       <link rel="stylesheet" type="text/css" href="base/css/lib/bootstrap/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="base/css/style.css">
       <link rel="stylesheet" type="text/css" href="base/css/reset.css">
       <link rel="stylesheet" type="text/css" href="base/css/responsive.css">
-      <link rel="stylesheet" type="text/css" href="base/css/lib/scrollbar/jquery.jscrollpane.css">
-      <link rel="stylesheet" type="text/css" href="base/css/lib/owl-carousel/owl.carousel.min.css">
       <link rel="stylesheet" type="text/css" href="base/css/lib/bootstrap/bootstrap-select.css">
-      <link rel="stylesheet" type="text/css" media="all" href="base/css/lib/bootstrap/daterangepicker.css">
    </head>
-   <body class="accordion-example">
+   <body class="language-example">
       <section class="clearfix content-section">
          <aside class="right-panel">
             <div class="panel-block">
                <div class="panel-block-content no-padding">
                   <div class="global-message-wrapper col-md-12"></div>
                   <div class="panel-block-head-content no-padding">
-					<div class = "panel-accordion-wrapper"></div>
+                     <div class="content-language"></div>
                   </div>
                </div>
             </div>
@@ -33,27 +30,19 @@
       <script type="text/javascript" src="base/js/lib/jQuery/jquery-v2-1-1.min.js"></script>
       <!-- Bootstrap Plugin Js -->
       <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap.min.js"></script>
-      <script type="text/javascript" src="base/js/lib/blockUI/jquery.blockUI.js"></script>
       <script type="text/javascript" src="base/js/lib/language/jquery.i18n.properties.js"></script>
-      <!-- custom scrollbar plugin -->
-      <script type="text/javascript" src="base/js/lib/scrollbar/jquery.jscrollpane.min.js"></script>
-      <script type="text/javascript" src="base/js/lib/scrollbar/jquery.mousewheel.js"></script>
-      <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap-select.js"></script>
-      <script type="text/javascript" src="base/js/lib/bootstrap/moment.js"></script>
-      <script type="text/javascript" src="base/js/lib/bootstrap/daterangepicker.js"></script>
-      <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap-typeahead.js"></script>
+	  <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap-select.js"></script>
       <!-- Custom JavaScript -->
-	  <script type="text/javascript" src="base/js/plugins/validation.js"></script>
-	  <script type="text/javascript" src="base/js/plugins/dynamic-form.js"></script>
       <script type="text/javascript" src="base/js/include/variables.js"></script>  
-      <script type="text/javascript" src="base/js/include/form-elements.js"></script>
-      <script type="text/javascript" src="base/js/include/accordion-functions/functions.js"></script>
+      <script type="text/javascript" src="base/js/include/languages/functions.js"></script>
       <script type="text/javascript" src="base/js/include/general.js"></script>
-      <script type="text/javascript" src="base/layouts/lib-template.js"></script>  
+      <script type="text/javascript" src="base/layouts/languages/lib-template.js"></script>  
       <script type="text/javascript">
          $(document).ready(function(){
-			
+			$(".content-language").append($(languageHTML).prop("outerHTML"));
+			baseFunctions.languageDdAction();
          });
+          
       </script>
    </body>
 </html>

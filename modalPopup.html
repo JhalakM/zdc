@@ -7,7 +7,7 @@
       <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <!-- Favicon icon -->
-      <title>Zodiac - Accordion & Switching Demo</title>
+      <title>ZCS - Modal Popup Demo</title>
       <link rel="stylesheet" type="text/css" href="base/css/lib/bootstrap/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="base/css/style.css">
       <link rel="stylesheet" type="text/css" href="base/css/reset.css">
@@ -17,14 +17,14 @@
       <link rel="stylesheet" type="text/css" href="base/css/lib/bootstrap/bootstrap-select.css">
       <link rel="stylesheet" type="text/css" media="all" href="base/css/lib/bootstrap/daterangepicker.css">
    </head>
-   <body class="accordion-example">
+   <body class="modal-popup">
       <section class="clearfix content-section">
          <aside class="right-panel">
             <div class="panel-block">
                <div class="panel-block-content no-padding">
                   <div class="global-message-wrapper col-md-12"></div>
                   <div class="panel-block-head-content no-padding">
-					<div class = "panel-accordion-wrapper"></div>
+                     <div class="panel-grid-main"></div>
                   </div>
                </div>
             </div>
@@ -38,22 +38,27 @@
       <!-- custom scrollbar plugin -->
       <script type="text/javascript" src="base/js/lib/scrollbar/jquery.jscrollpane.min.js"></script>
       <script type="text/javascript" src="base/js/lib/scrollbar/jquery.mousewheel.js"></script>
-      <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap-select.js"></script>
-      <script type="text/javascript" src="base/js/lib/bootstrap/moment.js"></script>
-      <script type="text/javascript" src="base/js/lib/bootstrap/daterangepicker.js"></script>
-      <script type="text/javascript" src="base/js/lib/bootstrap/bootstrap-typeahead.js"></script>
       <!-- Custom JavaScript -->
-	  <script type="text/javascript" src="base/js/plugins/validation.js"></script>
-	  <script type="text/javascript" src="base/js/plugins/dynamic-form.js"></script>
       <script type="text/javascript" src="base/js/include/variables.js"></script>  
-      <script type="text/javascript" src="base/js/include/form-elements.js"></script>
-      <script type="text/javascript" src="base/js/include/accordion-functions/functions.js"></script>
+      <script type="text/javascript" src="base/js/include/modal-popup/functions.js"></script>
+      <script type="text/javascript" src="base/js/include/modal-popup/actions.js"></script>
       <script type="text/javascript" src="base/js/include/general.js"></script>
-      <script type="text/javascript" src="base/layouts/lib-template.js"></script>  
+      <script type="text/javascript" src="base/layouts/modal-popup/lib-template.js"></script>  
       <script type="text/javascript">
          $(document).ready(function(){
-			
+			if($(manage_columns_wrapper_id).length != 0){
+				$(manage_columns_wrapper_id).remove();
+			} 
+			var componentObject = {
+					"modalHTML" 		: grid_manage_columns,
+					"blockWrapper"		: "manage-columns",
+					"wrapperId"			: manage_columns_wrapper_id,
+					"getURL"			: "json/all-columns.json",
+					"setURL"			: "json/save-manage-columns.json"
+			};
+			baseGridActions.generateManageColumn(componentObject);
          });
+          
       </script>
    </body>
 </html>
